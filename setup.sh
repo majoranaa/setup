@@ -18,6 +18,7 @@ if [ -e ./.bashrc_custom ]; then
 fi
 if [ -e ./.bash_logout ]; then
     mv .bash_logout .bash_logout.old
+fi
 if [ -d ./.emacs.d/ ]; then
     rm -rf .emacs.d.old
     mv -f .emacs.d .emacs.d.old

@@ -36,6 +36,12 @@ ln -sb doot/.bash_logout .
 ln -sf doot/.emacs.d .
 
 sudo apt-get install -y git
+echo -n "Enter git name: "
+read gitname
+echo -n "Enter git email: "
+read gitemail
+git config --global user.name "$gitname"
+git config --global user.email "$gitemail"
 sudo apt-get install -y curl
 
 echo -n "Install node stack? (nvm, jshint, rlwrap, heroku) [y] or n: "

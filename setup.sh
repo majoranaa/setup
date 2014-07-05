@@ -37,11 +37,6 @@ ln -sf doot/.emacs.d .
 
 sudo apt-get install -y git
 sudo apt-get install -y curl
-# DOESN'T WORK FOR SOME REASON
-# curl https://raw.github.com/creationix/nvm/master/install.sh | sh
-# HAVE TO USE WGET INSTEAD
-wget https://raw.github.com/creationix/nvm/master/install.sh
-sh install.sh
 
 echo -n "Install node stack? (nvm, jshint, rlwrap, heroku) [y] or n: "
 read innode
@@ -53,6 +48,13 @@ if [ "$innode" != "n" ]; then
     # Install nvm: node-version manager
     # https://github.com/creationix/nvm
     # Load nvm and install latest production node
+
+    # DOESN'T WORK FOR SOME REASON
+    # curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+    # HAVE TO USE WGET INSTEAD
+    wget https://raw.github.com/creationix/nvm/master/install.sh
+    sh install.sh
+
     source $HOME/.nvm/nvm.sh
     nvm install v0.10.12
     nvm use v0.10.12

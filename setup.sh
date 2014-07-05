@@ -1,6 +1,38 @@
 #!/bin/bash
-# Simple setup.sh for configuring Ubuntu 12.04 LTS EC2 instance
+# Simple setup.sh for configuring Ubuntu
 # for headless setup. 
+
+# git pull and install dotfiles as well
+cd $HOME
+if [ -e ./.bash_profile ]; then
+    mv .bash_profile .bash_profile.old
+fi
+if [ -e ./.bashrc ]; then
+    mv .bashrc .bashrc.old
+fi
+if [ -e ./.screenrc ]; then
+    mv .screenrc .screenrc.old
+fi
+if [ -e ./.bashrc_custom ]; then
+    mv .bashrc_custom .bashrc_custom.old
+fi
+if [ -e ./.bash_logout ]; then
+    mv .bash_logout .bash_logout.old
+if [ -d ./.emacs.d/ ]; then
+    rm -rf .emacs.d.old
+    mv -f .emacs.d .emacs.d.old
+fi
+if [ -d ./doot/ ]; then
+    rm -rf doot.old
+    mv -f doot doot.old
+fi
+git clone git@github.com:majoranaa/doot.git
+ln -sb doot/.screenrc .
+ln -sb doot/.bash_profile .
+ln -sb doot/.bashrc .
+ln -sb doot/.bashrc_custom .
+ln -sb doot/.bash_logout .
+ln -sf doot/.emacs.d .
 
 # Install nvm: node-version manager
 # https://github.com/creationix/nvm
@@ -8,41 +40,33 @@ sudo apt-get install -y git
 sudo apt-get install -y curl
 curl https://raw.github.com/creationix/nvm/master/install.sh | sh
 
-# Load nvm and install latest production node
-source $HOME/.nvm/nvm.sh
-nvm install v0.10.12
-nvm use v0.10.12
+echo -n "Install node stack? (nvm, jshint, rlwrap, heroku) [y] or n: "
+read innode
+while [ "$innode" != "y" -a "$innode" != "n" -a "$innode" != "" ]; do
+    echo -n "Please enter [y] or n: "
+    read innode
+done
+if [ "$innode" != "n" ]; then
+    # Load nvm and install latest production node
+    source $HOME/.nvm/nvm.sh
+    nvm install v0.10.12
+    nvm use v0.10.12
+    
+    # Install jshint to allow checking of JS code within emacs
+    # http://jshint.com/
+    npm install -g jshint
+    
+    # Install rlwrap to provide libreadline features with node
+    # See: http://nodejs.org/api/repl.html#repl_repl
+    sudo apt-get install -y rlwrap
 
-# Install jshint to allow checking of JS code within emacs
-# http://jshint.com/
-npm install -g jshint
-
-# Install rlwrap to provide libreadline features with node
-# See: http://nodejs.org/api/repl.html#repl_repl
-sudo apt-get install -y rlwrap
+    # Install Heroku toolbelt
+    # https://toolbelt.heroku.com/debian
+    wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+fi
 
 # Install emacs24
 # https://launchpad.net/~cassou/+archive/emacs
 sudo add-apt-repository -y ppa:cassou/emacs
 sudo apt-get -qq update
 sudo apt-get install -y emacs24-nox emacs24-el emacs24-common-non-dfsg
-
-# Install Heroku toolbelt
-# https://toolbelt.heroku.com/debian
-wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
-
-# git pull and install dotfiles as well
-cd $HOME
-if [ -d ./dotfiles/ ]; then
-    mv dotfiles dotfiles.old
-fi
-if [ -d .emacs.d/ ]; then
-    mv .emacs.d .emacs.d~
-fi
-git clone https://github.com/startup-class/dotfiles.git
-ln -sb dotfiles/.screenrc .
-ln -sb dotfiles/.bash_profile .
-ln -sb dotfiles/.bashrc .
-ln -sb dotfiles/.bashrc_custom .
-ln -sf dotfiles/.emacs.d .
-

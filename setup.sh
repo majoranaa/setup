@@ -44,7 +44,7 @@ git config --global user.name "$gitname"
 git config --global user.email "$gitemail"
 sudo apt-get install -y curl
 
-echo -n "Install node stack? (nvm, jshint, rlwrap, heroku) [y] or n: "
+echo -n "Install node stack? (nvm, jshint, rlwrap, heroku, express, bower) [y] or n: "
 read innode
 while [ "$innode" != "y" -a "$innode" != "n" -a "$innode" != "" ]; do
     echo -n "Please enter [y] or n: "
@@ -55,15 +55,12 @@ if [ "$innode" != "n" ]; then
     # https://github.com/creationix/nvm
     # Load nvm and install latest production node
 
-    # DOESN'T WORK FOR SOME REASON
-    # curl https://raw.github.com/creationix/nvm/master/install.sh | sh
-    # HAVE TO USE WGET INSTEAD
-    wget https://raw.github.com/creationix/nvm/master/install.sh
-    sh install.sh
+    curl https://raw.githubusercontent.com/creationix/nvm/v0.10.0/install.sh | bash
 
     source $HOME/.nvm/nvm.sh
     nvm install v0.10.12
     nvm use v0.10.12
+    nvm install -g npm
     
     # Install jshint to allow checking of JS code within emacs
     # http://jshint.com/
@@ -76,6 +73,27 @@ if [ "$innode" != "n" ]; then
     # Install Heroku toolbelt
     # https://toolbelt.heroku.com/debian
     wget -qO- https://toolbelt.heroku.com/install-ubuntu.sh | sh
+    
+    # Install express & bower
+    npm install -g express
+    npm install -g bower
+fi
+
+# LAMP Stack. Refer to https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-14-04
+# for more info on installing for Ubuntu 14.04
+echo -n "Install LAMP stack? (Apache 2.4.7, Mysql 5.5.37, PHP 5.5.9, (i.e. the latest versions) [y] or n: "
+read inlamp
+while [ "$inlamp" != "y" -a "$inlamp" != "n" -a "$inlamp" != "" ]; do
+    echo -n "Please enter [y] or n: "
+    read inlamp
+done
+if [ "$inlamp" != "n" ]; then
+    sudo apt-get update
+    sudo apt-get install -y apache2
+    sudo apt-get install mysql-server libapache2-mod-auth-mysql php5-mysql
+    sudo mysql_install_db
+    sudo mysql_secure_installation
+    sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
 fi
 
 # Install emacs24

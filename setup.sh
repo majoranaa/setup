@@ -55,11 +55,11 @@ if [ "$innode" != "n" ]; then
     # https://github.com/creationix/nvm
     # Load nvm and install latest production node
 
-    curl https://raw.githubusercontent.com/creationix/nvm/v0.10.0/install.sh | bash
+    curl https://raw.githubusercontent.com/creationix/nvm/v0.17.3/install.sh | bash
 
     source $HOME/.nvm/nvm.sh
-    nvm install v0.10.12
-    nvm use v0.10.12
+    nvm install v0.10.33
+    nvm use v0.10.33
     nvm install -g npm
     
     # Install jshint to allow checking of JS code within emacs

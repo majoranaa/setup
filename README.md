@@ -1,12 +1,11 @@
 setup.git
 =========
-Clone and run this Ubuntu 12.04.2 LTS to
+Clone and run this on Ubuntu/Mac after switching to the corresponding branch to
 configure both the machine and your individual development environment as
 follows:
 
+**1) Install [git](http://git-scm.com/download/linux) and add keys**
 ```sh
-cd $HOME
-sudo apt-get install -y git-core
-git clone git@github.com:majoranaa/setup.git
+git clone https://github.com/majoranaa/setup.git
 ./setup/setup.sh   
 ```

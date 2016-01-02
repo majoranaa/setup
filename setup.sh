@@ -31,9 +31,10 @@ git clone git@github.com:majoranaa/doot.git
 ln -sb doot/.screenrc .
 ln -sb doot/.bash_profile .
 ln -sb doot/.bashrc .
-ln -sb doot/.bashrc_custom .
 ln -sb doot/.bash_logout .
-ln -sf doot/.emacs.d .
+ln -sb doot/.tmux.conf .
+mv .emacs.d .emacs.d~
+ln -s doot/.emacs.d .
 
 sudo apt-get install -y git
 echo -n "Enter git name: "
@@ -96,8 +97,5 @@ if [ "$inlamp" != "n" ]; then
     sudo apt-get install php5 libapache2-mod-php5 php5-mcrypt
 fi
 
-# Install emacs24
-# https://launchpad.net/~cassou/+archive/emacs
-sudo add-apt-repository -y ppa:cassou/emacs
-sudo apt-get -qq update
-sudo apt-get install -y emacs24-nox emacs24-el emacs24-common-non-dfsg
+# emacs
+sudo apt-get install -y emacs

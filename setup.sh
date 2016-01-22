@@ -13,6 +13,9 @@ fi
 if [ -e ./.screenrc ]; then
     mv .screenrc .screenrc.old
 fi
+if [ -e ./.tmux.conf ]; then
+    mv .tmux.conf .tmux.conf.old
+fi
 if [ -e ./.bashrc_custom ]; then
     mv .bashrc_custom .bashrc_custom.old
 fi

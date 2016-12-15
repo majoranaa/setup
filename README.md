@@ -8,5 +8,6 @@ individual development environment as follows:
 **2) Execute:**
 ```sh
 git clone https://github.com/majoranaa/setup.git
-./setup/setup.sh
+cd setup
+./setup.sh
 ```

@@ -1,6 +1,10 @@
 Setup
 =========
 
+**THIS REPOSITORY IS DEPRECATED AND SHOULD NO LONGER BE USED FOR SETUP. IT REMAINS HERE PURELY FOR
+  REFERENCE PURPOSES BUT SHOULD NOT BE EXECUTED. YOU JUST NEED TO FOLLOW THE INSTRUCTIONS AT THE
+  [doot](http://github.com/majoranaa/doot) REPOSITORY FOR SETUP.**
+
 Clone and run this on Linux/Mac to configure both the machine and your individual development
 environment as follows:
 
